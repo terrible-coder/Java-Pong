@@ -70,5 +70,6 @@ public class Player {
 								PLAYER_BOUNDS.getWidth(),
 								PLAYER_BOUNDS.getHeight()
 								));
+		g2d.dispose();
 	}
 }

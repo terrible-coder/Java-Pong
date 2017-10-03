@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class Pong_Screen extends JPanel{
+public class Pong_Screen extends JPanel implements KeyListener{
 	static final long serialVersionUID = JPanel.FRAMEBITS;
 	
 	Ball b;
@@ -23,29 +23,8 @@ public class Pong_Screen extends JPanel{
 		pai = new PlayerAI(0.1*width, height/2.0);
 		pai.setContainer(this);
 		gameOn = false;
-
-		KeyListener kListener = new KeyListener(){
-			public void keyPressed(KeyEvent e){
-				int key = e.getKeyCode();
-				switch(key){
-				case KeyEvent.VK_UP:
-					p.vel.y = -1;
-					break;
-				case KeyEvent.VK_DOWN:
-					p.vel.y = 1;
-					break;
-				default:
-					gameOn = !gameOn;
-				}
-			}
-			public void keyTyped(KeyEvent e){
-				
-			}
-			public void keyReleased(KeyEvent e){
-				p.vel.y = 0;
-			}
-		};
-		addKeyListener(kListener);
+		
+		addKeyListener(this);
 		
 	}
 	
@@ -89,5 +68,30 @@ public class Pong_Screen extends JPanel{
 		p.paint(g);
 		pai.paint(g);
 		repaint();
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e){
+		int key = e.getKeyCode();
+		switch(key){
+		case KeyEvent.VK_UP:
+			p.vel.y = -1;
+			break;
+		case KeyEvent.VK_DOWN:
+			p.vel.y = 1;
+			break;
+		default:
+			gameOn = !gameOn;
+		}
+	}
+	
+	@Override
+	public void keyReleased(KeyEvent e){
+		p.vel.y = 0;
+	}
+	
+	@Override
+	public void keyTyped(KeyEvent e){
+		
 	}
 }

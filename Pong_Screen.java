@@ -56,11 +56,32 @@ public class Pong_Screen extends JPanel{
 		gameOn = false;
 	}
 	
+	void paintScores(Graphics g){
+		Graphics2D g2d = (Graphics2D)g.create();
+		String scores = pai.score + " - " + p.score;
+		Font font = new Font(Font.SERIF, Font.PLAIN, 30);
+		Rectangle2D rect = font.getStringBounds(scores, g2d.getFontRenderContext());
+		double sx = (getWidth() - rect.getWidth())/2;
+		g2d.setColor(Color.WHITE);
+		g2d.setFont(font);
+		g2d.drawString(scores, (float)sx, (float)rect.getHeight());
+		g2d.dispose();
+	}
+	
 	@Override
 	public void paintComponent(Graphics g){
 		g.fillRect(0, 0, getWidth(), getHeight());
 		if(gameOn){
 			b.update();
+			if(b.pos.x<0){
+				p.score++;
+				b.vel = new PVector(-1, 0);
+				resetGame();
+			}else if(b.pos.x>getWidth()){
+				pai.score++;
+				b.vel = new PVector(1, 0);
+				resetGame();
+			}
 			p.update(b);
 			pai.update(b);
 		}

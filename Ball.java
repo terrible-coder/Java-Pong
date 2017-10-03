@@ -28,13 +28,13 @@ public class Ball {
 			pos.y = screen.getHeight() - BALL_SIZE/2;
 			vel.y *= -1;
 		}
-		if(left<0){
+		/*if(left<0){
 			pos.x = BALL_SIZE/2;
 			vel.x *= -1;
 		}else if(right>screen.getWidth()){
 			pos.x = screen.getWidth() - BALL_SIZE/2;
 			vel.x *= -1;
-		}
+		}*/
 	}
 	
 	void paint(Graphics g){
@@ -42,5 +42,6 @@ public class Ball {
 		g2d.setColor(Color.WHITE);
 		g2d.fill(new Ellipse2D.Double(pos.x - BALL_SIZE/2, pos.y - BALL_SIZE/2,
 										BALL_SIZE, BALL_SIZE));
+		g2d.dispose();
 	}
 }
